@@ -48,7 +48,8 @@ from ID_scenes import *
 ####################################################################################################################
 
 # Some constant and function declarations to be used below...
-
+# min=x
+# max=x+10+int(x/10)
 def wp(x):
   n = 0
   r = 10 + int(x / 10)
@@ -404,7 +405,7 @@ troops = [
   ["cattle","Cattle","Cattle",0,no_scene,reserved,fac_neutral, [], def_attrib|level(1),wp(60),0,mercenary_face_1, mercenary_face_2],
 
 
-#soldiers:
+#soldiers:（士兵）
 #This troop is the troop marked as soldiers_begin
   ["farmer","Farmer","Farmers",tf_guarantee_armor,no_scene,reserved,fac_commoners,
    [itm_cleaver,itm_knife,itm_pitch_fork,itm_sickle,itm_club,itm_stones,itm_leather_cap,itm_felt_hat,itm_felt_hat,itm_linen_tunic,itm_coarse_tunic,itm_nomad_boots,itm_wrapping_boots],
@@ -436,7 +437,6 @@ troops = [
   ["mercenaries_end","mercenaries_end","mercenaries_end",0,no_scene,reserved,fac_commoners,
    [],
    def_attrib|level(4),wp(60),knows_common,mercenary_face_1, mercenary_face_2],
-
 #peasant - retainer - footman - man-at-arms -  knight
   ["swadian_recruit","Swadian Recruit","Swadian Recruits",tf_guarantee_armor,0,0,fac_neutral,
    [itm_scythe,itm_hatchet,itm_pickaxe,itm_club,itm_stones,itm_tab_shield_heater_a,itm_leather_cap,itm_felt_hat,itm_felt_hat,
@@ -1474,8 +1474,7 @@ troops = [
    knows_power_throw_3|knows_athletics_2|knows_power_strike_1,
    0x00000000000c100739ce9c805d2f381300000000001cc7ad0000000000000000],
 #NPC system changes end
-
-  ["kingdom_heroes_including_player_begin",  "kingdom_heroes_including_player_begin",  "kingdom_heroes_including_player_begin",  tf_hero, 0,reserved,  fac_kingdom_1,[],          lord_attrib,wp(220),knows_lord_1, 0x000000000010918a01f248377289467d],
+["kingdom_heroes_including_player_begin",  "kingdom_heroes_including_player_begin",  "kingdom_heroes_including_player_begin",  tf_hero, 0,reserved,  fac_kingdom_1,[],          lord_attrib,wp(220),knows_lord_1, 0x000000000010918a01f248377289467d],
 
 #governers olgrel rasevas                                                                        Horse          Bodywear                Footwear_in                     Footwear_out                    Armor                       Weapon                  Shield                  Headwaer
   ["kingdom_1_lord",  "King Harlaus",  "Kingdom 1 Lord",  tf_hero, 0,reserved,  fac_kingdom_1,[itm_charger,   itm_rich_outfit,        itm_blue_hose,                  itm_iron_greaves,               itm_plate_armor, itm_gauntlets,    itm_bastard_sword_b,      itm_tab_shield_heater_cav_b,       itm_great_helmet],          knight_attrib_5,wp(220),knight_skills_5|knows_trainer_5, 0x0000000f45041105241acd2b5a66a86900000000001e98310000000000000000,swadian_face_older_2],

@@ -53,16 +53,25 @@ slot_faction_state                = 21
 
 slot_faction_player_alarm         = 30
 slot_faction_last_mercenary_offer_time = 31
-
+#1级兵种(1.在村庄招募时使用，2.生成逃兵时使用)
 slot_faction_tier_1_troop         = 41
+#2级兵种
 slot_faction_tier_2_troop         = 42
+#3级兵种
 slot_faction_tier_3_troop         = 43
+#4级兵种
 slot_faction_tier_4_troop         = 44
+#5级兵种（1.帮助领主练兵的任务）
 slot_faction_tier_5_troop         = 45
+#逃兵兵种
 slot_faction_deserter_troop       = 48
+#守卫兵种
 slot_faction_guard_troop          = 49
+#信使兵种
 slot_faction_messenger_troop      = 50
+#监狱守卫
 slot_faction_prison_guard_troop   = 51
+#城堡守卫
 slot_faction_castle_guard_troop   = 52
 
 slot_faction_has_rebellion_chance = 60

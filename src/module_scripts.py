@@ -538,15 +538,17 @@ scripts = [
 ##      (call_script, "script_diplomacy_start_war_between_kingdoms", "fac_kingdom_3", "fac_kingdom_2"),
 ##      (call_script, "script_diplomacy_start_war_between_kingdoms", "fac_kingdom_3", "fac_kingdom_5"),
       
-	  
+	  ## 随机开始战争或停战
       (try_for_range, ":unused", 0, 70),
         (call_script, "script_randomly_start_war_peace", 0),
       (try_end),
-
+      ##
       (try_for_range, ":faction_no", kingdoms_begin, kingdoms_end),
-        (faction_set_slot, ":faction_no", slot_faction_marshall, -1),
-        (faction_get_slot, ":culture", ":faction_no", slot_faction_culture),
-      
+        #设置国家的元帅为-1，就是没有元帅
+       (faction_set_slot, ":faction_no", slot_faction_marshall, -1),
+       #获得当前国家的文化
+       (faction_get_slot, ":culture", ":faction_no", slot_faction_culture),
+        #将该国家的文化中所保存的兵种信息设置到该国家所对应的兵种上
         (faction_get_slot, ":troop", ":culture",  slot_faction_tier_1_troop),
         (faction_set_slot, ":faction_no",  slot_faction_tier_1_troop, ":troop"),
         (faction_get_slot, ":troop", ":culture",  slot_faction_tier_2_troop),
@@ -559,8 +561,9 @@ scripts = [
         (faction_set_slot, ":faction_no",  slot_faction_tier_5_troop, ":troop"),
       
         (try_begin),
+          #如果当前国家所对应的文化是fac_culture_1
           (faction_slot_eq, ":faction_no", slot_faction_culture, "fac_culture_1"),
-      
+          #设置该国家所对应的其它兵种信息（逃兵，城堡守卫，监狱守卫，信使等等）
           (faction_set_slot, ":faction_no",  slot_faction_deserter_troop, "trp_swadian_deserter"),
           (faction_set_slot, ":faction_no",  slot_faction_guard_troop, "trp_swadian_sergeant"),
           (faction_set_slot, ":faction_no",  slot_faction_messenger_troop, "trp_swadian_messenger"),
@@ -614,39 +617,39 @@ scripts = [
           (faction_set_slot, ":faction_no",  slot_faction_reinforcements_b, "pt_kingdom_5_reinforcements_b"),
           (faction_set_slot, ":faction_no",  slot_faction_reinforcements_c, "pt_kingdom_5_reinforcements_c"),
 		##新建国家特色
-		# (else_try),
-		#   (faction_slot_eq, ":faction_no", slot_faction_culture, "fac_culture_6"),
-        #
-        #   (faction_set_slot, ":faction_no",  slot_faction_deserter_troop, "trp_han_deserter"),
-        #   (faction_set_slot, ":faction_no",  slot_faction_guard_troop, "trp_han_sergeant"),
-        #   (faction_set_slot, ":faction_no",  slot_faction_messenger_troop, "trp_han_messenger"),
-        #   (faction_set_slot, ":faction_no",  slot_faction_prison_guard_troop, "trp_han_prison_guard"),
-        #   (faction_set_slot, ":faction_no",  slot_faction_castle_guard_troop, "trp_han_castle_guard"),
-        #   (faction_set_slot, ":faction_no",  slot_faction_reinforcements_a, "pt_kingdom_6_reinforcements_a"),
-        #   (faction_set_slot, ":faction_no",  slot_faction_reinforcements_b, "pt_kingdom_6_reinforcements_b"),
-        #   (faction_set_slot, ":faction_no",  slot_faction_reinforcements_c, "pt_kingdom_6_reinforcements_c"),
-        # (else_try),
-        #   (faction_slot_eq, ":faction_no", slot_faction_culture, "fac_culture_7"),
-        #
-        #   (faction_set_slot, ":faction_no", slot_faction_deserter_troop, "trp_yan_deserter"),
-        #   (faction_set_slot, ":faction_no", slot_faction_guard_troop, "trp_yan_guard"),
-        #   (faction_set_slot, ":faction_no", slot_faction_messenger_troop, "trp_yan_messenger"),
-        #   (faction_set_slot, ":faction_no", slot_faction_prison_guard_troop, "trp_yan_prison_guard"),
-        #   (faction_set_slot, ":faction_no", slot_faction_castle_guard_troop, "trp_yan_castle_guard"),
-        #   (faction_set_slot, ":faction_no",  slot_faction_reinforcements_a, "pt_kingdom_7_reinforcements_a"),
-        #   (faction_set_slot, ":faction_no",  slot_faction_reinforcements_b, "pt_kingdom_7_reinforcements_b"),
-        #   (faction_set_slot, ":faction_no",  slot_faction_reinforcements_c, "pt_kingdom_7_reinforcements_c"),
-        # (else_try),
-        #   (faction_slot_eq, ":faction_no", slot_faction_culture, "fac_culture_8"),
-        #
-        #   (faction_set_slot, ":faction_no", slot_faction_deserter_troop, "trp_zhou_deserter"),
-        #   (faction_set_slot, ":faction_no", slot_faction_guard_troop, "trp_zhou_horseman"),
-        #   (faction_set_slot, ":faction_no", slot_faction_messenger_troop, "trp_zhou_messenger"),
-        #   (faction_set_slot, ":faction_no", slot_faction_prison_guard_troop, "trp_zhou_prison_guard"),
-        #   (faction_set_slot, ":faction_no", slot_faction_castle_guard_troop, "trp_zhou_castle_guard"),
-        #   (faction_set_slot, ":faction_no",  slot_faction_reinforcements_a, "pt_kingdom_8_reinforcements_a"),
-        #   (faction_set_slot, ":faction_no",  slot_faction_reinforcements_b, "pt_kingdom_8_reinforcements_b"),
-        #   (faction_set_slot, ":faction_no",  slot_faction_reinforcements_c, "pt_kingdom_8_reinforcements_c"),
+		(else_try),
+		  (faction_slot_eq, ":faction_no", slot_faction_culture, "fac_culture_6"),
+
+          (faction_set_slot, ":faction_no",  slot_faction_deserter_troop, "trp_han_deserter"),
+          (faction_set_slot, ":faction_no",  slot_faction_guard_troop, "trp_han_sergeant"),
+          (faction_set_slot, ":faction_no",  slot_faction_messenger_troop, "trp_han_messenger"),
+          (faction_set_slot, ":faction_no",  slot_faction_prison_guard_troop, "trp_han_prison_guard"),
+          (faction_set_slot, ":faction_no",  slot_faction_castle_guard_troop, "trp_han_castle_guard"),
+          (faction_set_slot, ":faction_no",  slot_faction_reinforcements_a, "pt_kingdom_6_reinforcements_a"),
+          (faction_set_slot, ":faction_no",  slot_faction_reinforcements_b, "pt_kingdom_6_reinforcements_b"),
+          (faction_set_slot, ":faction_no",  slot_faction_reinforcements_c, "pt_kingdom_6_reinforcements_c"),
+        (else_try),
+          (faction_slot_eq, ":faction_no", slot_faction_culture, "fac_culture_7"),
+
+          (faction_set_slot, ":faction_no", slot_faction_deserter_troop, "trp_yan_deserter"),
+          (faction_set_slot, ":faction_no", slot_faction_guard_troop, "trp_yan_guard"),
+          (faction_set_slot, ":faction_no", slot_faction_messenger_troop, "trp_yan_messenger"),
+          (faction_set_slot, ":faction_no", slot_faction_prison_guard_troop, "trp_yan_prison_guard"),
+          (faction_set_slot, ":faction_no", slot_faction_castle_guard_troop, "trp_yan_castle_guard"),
+          (faction_set_slot, ":faction_no",  slot_faction_reinforcements_a, "pt_kingdom_7_reinforcements_a"),
+          (faction_set_slot, ":faction_no",  slot_faction_reinforcements_b, "pt_kingdom_7_reinforcements_b"),
+          (faction_set_slot, ":faction_no",  slot_faction_reinforcements_c, "pt_kingdom_7_reinforcements_c"),
+        (else_try),
+          (faction_slot_eq, ":faction_no", slot_faction_culture, "fac_culture_8"),
+
+          (faction_set_slot, ":faction_no", slot_faction_deserter_troop, "trp_zhou_deserter"),
+          (faction_set_slot, ":faction_no", slot_faction_guard_troop, "trp_zhou_horseman"),
+          (faction_set_slot, ":faction_no", slot_faction_messenger_troop, "trp_zhou_messenger"),
+          (faction_set_slot, ":faction_no", slot_faction_prison_guard_troop, "trp_zhou_prison_guard"),
+          (faction_set_slot, ":faction_no", slot_faction_castle_guard_troop, "trp_zhou_castle_guard"),
+          (faction_set_slot, ":faction_no",  slot_faction_reinforcements_a, "pt_kingdom_8_reinforcements_a"),
+          (faction_set_slot, ":faction_no",  slot_faction_reinforcements_b, "pt_kingdom_8_reinforcements_b"),
+          (faction_set_slot, ":faction_no",  slot_faction_reinforcements_c, "pt_kingdom_8_reinforcements_c"),
         (else_try),
           (faction_slot_eq, ":faction_no", slot_faction_culture, "fac_culture_9"),
       
@@ -737,7 +740,7 @@ scripts = [
           (faction_set_slot, ":faction_no",  slot_faction_reinforcements_c, "pt_kingdom_16_reinforcements_c"),
         (try_end),
       (try_end),
-
+      #玩家阵营的元帅为玩家自己
       (faction_set_slot, "fac_player_supporters_faction", slot_faction_marshall, "trp_player"),
 
       
@@ -11551,11 +11554,51 @@ scripts = [
       (try_end),
   ]),
 
+    #
+    #获得一个国家平均资源值
+    #一个国家平均资源值 =（城镇数量*2+城堡数量）/ 军队数量
+    #script_get_kingdom_resources_value
+    #Input:kingdom_id
+    #Output:kingdom_resources_value(reg0)
+    ("get_kingdom_resources_value",
+      [
+        (store_script_param, ":cur_kingdom", 1),
+        (faction_get_slot, ":num_towns", ":cur_kingdom", slot_faction_num_towns),
+        (store_mul, ":kingdom_resources_value", ":num_towns", 2),
+        (faction_get_slot, ":num_castles", ":cur_kingdom", slot_faction_num_castles),
+        (val_add, ":kingdom_resources_value", ":num_castles"),
+        (val_mul, ":kingdom_resources_value", 10),
+        (val_max, ":kingdom_resources_value", 1),
+        (val_mul, ":kingdom_resources_value", 1000),
+        (faction_get_slot, ":num_armies", ":cur_kingdom", slot_faction_num_armies),
+        (val_max, ":num_armies", 1),
+        (val_div, ":kingdom_resources_value", ":num_armies"),
+        (assign,reg0,":kingdom_resources_value"),
+      ]
+     ),
+    #
+    #获得一个阵营敌对国家的数量
+    #script_get_num_ongoing_wars
+    #Input:kingdom_id
+    #Output:num_ongoing_wars(reg0)
+    ("get_num_ongoing_wars",
+      [
+        (store_script_param, ":cur_kingdom", 1),
+        (assign, ":num_ongoing_wars", 0),
+        (try_for_range, ":other_kingdom", kingdoms_begin, kingdoms_end),
+            (faction_slot_eq, ":other_kingdom", slot_faction_state, sfs_active),
+            (store_relation, ":other_relation", ":cur_kingdom", ":other_kingdom"),
+            (lt, ":other_relation", 0),
+            (val_add, ":num_ongoing_wars", 1),
+        (try_end),
+        (assign,reg0,":num_ongoing_wars"),
+      ]
+     ),
   # 随机开始战争与和平
   # script_randomly_start_war_peace
   # Input: arg1 = initializing_war_peace_cond (1 = true, 0 = false)
   # Output: none
-  ("randomly_start_war_peace",
+  ("randomly_start_war_peace2",
     [
       (store_script_param_1, ":initializing_war_peace_cond"),
       #计算所有（激活状态）国家的平均资源值，城镇占二份，城堡占一份，不计算村庄
@@ -11564,48 +11607,25 @@ scripts = [
       (assign, ":total_resources", 0),
       (assign, ":total_active_kingdoms", 0),
       (try_for_range, ":cur_kingdom", kingdoms_begin, kingdoms_end),
+        (faction_slot_eq, ":cur_kingdom", slot_faction_state, sfs_active),
+        (val_add, ":total_active_kingdoms", 1),#累计激活国家数量
         (call_script,"script_get_kingdom_resources_value",":cur_kingdom"),
-        # (faction_slot_eq, ":cur_kingdom", slot_faction_state, sfs_active),
-        # (val_add, ":total_active_kingdoms", 1),
-        # (faction_get_slot, ":num_towns", ":cur_kingdom", slot_faction_num_towns),
-        # (store_mul, ":kingdom_resources_value", ":num_towns", 2),
-        # (faction_get_slot, ":num_castles", ":cur_kingdom", slot_faction_num_castles),
-        # (val_add, ":kingdom_resources_value", ":num_castles"),
-        # (val_mul, ":kingdom_resources_value", 10),
-        # (val_max, ":kingdom_resources_value", 1),
-        # (val_mul, ":kingdom_resources_value", 1000),
-        # (faction_get_slot, ":num_armies", ":cur_kingdom", slot_faction_num_armies),
-        # (val_max, ":num_armies", 1),
-        # (val_div, ":kingdom_resources_value", ":num_armies"),
         (val_add, ":total_resources", reg0),
       (try_end),
       (val_max, ":total_active_kingdoms", 1),
       #计算全国平均资源值
       (store_div, ":average_resources", ":total_resources", ":total_active_kingdoms"),
       #以下是一个双重循环，将当前国家和其它国家进行操作，以便进入交战或和平
-      #
       (try_for_range, ":cur_kingdom", kingdoms_begin, kingdoms_end),
  ##       (neq, ":cur_kingdom", "fac_player_supporters_faction"),
-        #如果国家是激活的状态，计算敌对国家的数量
+        #如果国家是激活的状态
         (faction_slot_eq, ":cur_kingdom", slot_faction_state, sfs_active),
-        (assign, ":num_ongoing_wars", 0),
-        (try_for_range, ":other_kingdom", kingdoms_begin, kingdoms_end),
-          (faction_slot_eq, ":other_kingdom", slot_faction_state, sfs_active),
-          (store_relation, ":other_relation", ":cur_kingdom", ":other_kingdom"),
-          (lt, ":other_relation", 0),
-          (val_add, ":num_ongoing_wars", 1),
-        (try_end),
+        #计算敌对国家的数量
+        (call_script,"script_get_num_ongoing_wars",":cur_kingdom"),
+        (assign, ":num_ongoing_wars", reg0),
         #获得当前国家的平均资源值
-        (faction_get_slot, ":num_towns", ":cur_kingdom", slot_faction_num_towns),
-        (store_mul, ":kingdom_1_resources_value", ":num_towns", 2),
-        (faction_get_slot, ":num_castles", ":cur_kingdom", slot_faction_num_castles),
-        (val_add, ":kingdom_1_resources_value", ":num_castles"),
-        (val_mul, ":kingdom_1_resources_value", 10),
-        (val_max, ":kingdom_1_resources_value", 1),
-        (val_mul, ":kingdom_1_resources_value", 1000),
-        (faction_get_slot, ":num_armies", ":cur_kingdom", slot_faction_num_armies),
-        (val_max, ":num_armies", 1),
-        (val_div, ":kingdom_1_resources_value", ":num_armies"),
+        (call_script,"script_get_kingdom_resources_value",":cur_kingdom"),
+        (assign,":kingdom_1_resources_value",reg0),
         ##计算当前国家的下一个国家编号
         (store_add, ":start_cond", ":cur_kingdom", 1),
         ##从下一个国家开始遍历直到最后一个国家
@@ -11613,32 +11633,18 @@ scripts = [
  ##         (neq, ":cur_kingdom", "fac_player_supporters_faction"),
           (faction_slot_eq, ":cur_kingdom_2", slot_faction_state, sfs_active),
           #计算国家的敌对数量
-          (assign, ":num_ongoing_wars_2", 0),
-          (try_for_range, ":other_kingdom", kingdoms_begin, kingdoms_end),
-            (faction_slot_eq, ":other_kingdom", slot_faction_state, sfs_active),
-            (store_relation, ":other_relation", ":cur_kingdom_2", ":other_kingdom"),
-            (lt, ":other_relation", 0),
-            (val_add, ":num_ongoing_wars_2", 1),
-          (try_end),
+          (call_script,"script_get_num_ongoing_wars",":cur_kingdom_2"),
+          (assign, ":num_ongoing_wars_2", reg0),
           #计算两个国家全部的敌对数量
           (store_add, ":total_ongoing_wars", ":num_ongoing_wars", ":num_ongoing_wars_2"),
           #计算国家的平均资源值
-          (faction_get_slot, ":num_towns", ":cur_kingdom_2", slot_faction_num_towns),
-          (store_mul, ":kingdom_2_resources_value", ":num_towns", 2),
-          (faction_get_slot, ":num_castles", ":cur_kingdom_2", slot_faction_num_castles),
-          (val_add, ":kingdom_2_resources_value", ":num_castles"),
-          (val_mul, ":kingdom_2_resources_value", 10),
-          (val_max, ":kingdom_2_resources_value", 1),
-          (val_mul, ":kingdom_2_resources_value", 1000),
-          (faction_get_slot, ":num_armies", ":cur_kingdom_2", slot_faction_num_armies),
-          (val_max, ":num_armies", 1),
-          (val_div, ":kingdom_2_resources_value", ":num_armies"),
+          (call_script,"script_get_kingdom_resources_value",":cur_kingdom_2"),
+          (assign,":kingdom_2_resources_value",reg0),
           #获得两个国家最大的资源值乘以100，最大资源值除以全世界平均资源值
           (assign, ":max_resources_value", ":kingdom_1_resources_value"),
           (val_max, ":max_resources_value", ":kingdom_2_resources_value"),
           (val_mul, ":max_resources_value", 100),
           (val_div, ":max_resources_value", ":average_resources"),
-
           (assign, ":cur_king", -1),
           (try_begin),
             #如果当前阵营是玩家阵营，获得下一个国家的国王
@@ -11769,6 +11775,188 @@ scripts = [
       (try_end),
      ]),
 
+# script_randomly_start_war_peace
+  # Input: arg1 = initializing_war_peace_cond (1 = true, 0 = false)
+  # Output: none
+  ("randomly_start_war_peace",
+    [
+      (store_script_param_1, ":initializing_war_peace_cond"),
+      (assign, ":total_resources", 0),
+      (assign, ":total_active_kingdoms", 0),
+      (try_for_range, ":cur_kingdom", kingdoms_begin, kingdoms_end),
+        (faction_slot_eq, ":cur_kingdom", slot_faction_state, sfs_active),
+        (val_add, ":total_active_kingdoms", 1),
+        (faction_get_slot, ":num_towns", ":cur_kingdom", slot_faction_num_towns),
+        (store_mul, ":kingdom_resources_value", ":num_towns", 2),
+        (faction_get_slot, ":num_castles", ":cur_kingdom", slot_faction_num_castles),
+        (val_add, ":kingdom_resources_value", ":num_castles"),
+        (val_mul, ":kingdom_resources_value", 10),
+        (val_max, ":kingdom_resources_value", 1),
+        (val_mul, ":kingdom_resources_value", 1000),
+        (faction_get_slot, ":num_armies", ":cur_kingdom", slot_faction_num_armies),
+        (val_max, ":num_armies", 1),
+        (val_div, ":kingdom_resources_value", ":num_armies"),
+        (val_add, ":total_resources", ":kingdom_resources_value"),
+      (try_end),
+      (val_max, ":total_active_kingdoms", 1),
+      (store_div, ":average_resources", ":total_resources", ":total_active_kingdoms"),
+
+      (try_for_range, ":cur_kingdom", kingdoms_begin, kingdoms_end),
+ ##       (neq, ":cur_kingdom", "fac_player_supporters_faction"),
+        (faction_slot_eq, ":cur_kingdom", slot_faction_state, sfs_active),
+        (assign, ":num_ongoing_wars", 0),
+        (try_for_range, ":other_kingdom", kingdoms_begin, kingdoms_end),
+          (faction_slot_eq, ":other_kingdom", slot_faction_state, sfs_active),
+          (store_relation, ":other_relation", ":cur_kingdom", ":other_kingdom"),
+          (lt, ":other_relation", 0),
+          (val_add, ":num_ongoing_wars", 1),
+        (try_end),
+
+        (faction_get_slot, ":num_towns", ":cur_kingdom", slot_faction_num_towns),
+        (store_mul, ":kingdom_1_resources_value", ":num_towns", 2),
+        (faction_get_slot, ":num_castles", ":cur_kingdom", slot_faction_num_castles),
+        (val_add, ":kingdom_1_resources_value", ":num_castles"),
+        (val_mul, ":kingdom_1_resources_value", 10),
+        (val_max, ":kingdom_1_resources_value", 1),
+        (val_mul, ":kingdom_1_resources_value", 1000),
+        (faction_get_slot, ":num_armies", ":cur_kingdom", slot_faction_num_armies),
+        (val_max, ":num_armies", 1),
+        (val_div, ":kingdom_1_resources_value", ":num_armies"),
+
+        (store_add, ":start_cond", ":cur_kingdom", 1),
+        (try_for_range, ":cur_kingdom_2", ":start_cond", kingdoms_end),
+ ##         (neq, ":cur_kingdom", "fac_player_supporters_faction"),
+          (faction_slot_eq, ":cur_kingdom_2", slot_faction_state, sfs_active),
+
+          (assign, ":num_ongoing_wars_2", 0),
+          (try_for_range, ":other_kingdom", kingdoms_begin, kingdoms_end),
+            (faction_slot_eq, ":other_kingdom", slot_faction_state, sfs_active),
+            (store_relation, ":other_relation", ":cur_kingdom_2", ":other_kingdom"),
+            (lt, ":other_relation", 0),
+            (val_add, ":num_ongoing_wars_2", 1),
+          (try_end),
+
+          (store_add, ":total_ongoing_wars", ":num_ongoing_wars", ":num_ongoing_wars_2"),
+
+          (faction_get_slot, ":num_towns", ":cur_kingdom_2", slot_faction_num_towns),
+          (store_mul, ":kingdom_2_resources_value", ":num_towns", 2),
+          (faction_get_slot, ":num_castles", ":cur_kingdom_2", slot_faction_num_castles),
+          (val_add, ":kingdom_2_resources_value", ":num_castles"),
+          (val_mul, ":kingdom_2_resources_value", 10),
+          (val_max, ":kingdom_2_resources_value", 1),
+          (val_mul, ":kingdom_2_resources_value", 1000),
+          (faction_get_slot, ":num_armies", ":cur_kingdom_2", slot_faction_num_armies),
+          (val_max, ":num_armies", 1),
+          (val_div, ":kingdom_2_resources_value", ":num_armies"),
+
+          (assign, ":max_resources_value", ":kingdom_1_resources_value"),
+          (val_max, ":max_resources_value", ":kingdom_2_resources_value"),
+          (val_mul, ":max_resources_value", 100),
+          (val_div, ":max_resources_value", ":average_resources"),
+
+          (assign, ":cur_king", -1),
+          (try_begin),
+            (eq, ":cur_kingdom", "fac_player_supporters_faction"),
+            (faction_get_slot, ":cur_king", ":cur_kingdom_2", slot_faction_leader),
+            (assign, ":cur_relation", reg0),
+            (store_sub, ":relation_effect", 200, ":cur_relation"),
+            (val_mul, ":kingdom_1_resources_value", ":relation_effect"),
+            (val_div, ":kingdom_1_resources_value", 200),
+          (else_try),
+            (eq, ":cur_kingdom_2", "fac_player_supporters_faction"),
+            (faction_get_slot, ":cur_king", ":cur_kingdom", slot_faction_leader),
+          (try_end),
+
+          (try_begin),
+            (ge, ":cur_king", 0),
+            (call_script, "script_troop_get_player_relation", ":cur_king"),
+            (assign, ":cur_relation", reg0),
+            (store_sub, ":relation_effect", 200, ":cur_relation"),
+            (val_mul, ":max_resources_value", ":relation_effect"),
+            (val_div, ":max_resources_value", 200),
+          (try_end),
+
+          #max_resources_value is the obtained value that gives us how tempting the kingdom's values are
+          #average is 100
+          (val_clamp, ":max_resources_value", 20, 500),
+          #not letting more than 5 times higher chance of declaring war or peace
+
+          (store_random_in_range, ":random_no", 0, 10000),
+          (store_relation, ":cur_relation", ":cur_kingdom", ":cur_kingdom_2"),
+          (try_begin),
+            (lt, ":cur_relation", 0), #AT WAR
+            (store_mul, ":chance_to_make_peace", ":total_ongoing_wars", 50),
+            (val_mul, ":chance_to_make_peace", 100),
+            (val_div, ":chance_to_make_peace", ":max_resources_value"),
+            (try_begin),
+              #disable random peace for special conditions
+              (this_or_next|eq, ":cur_kingdom", "fac_player_supporters_faction"),
+              (eq, ":cur_kingdom_2", "fac_player_supporters_faction"),
+              (assign, ":continue", 0),
+              (try_begin),
+                (gt, "$supported_pretender", 0),
+                (this_or_next|eq, ":cur_kingdom", "$supported_pretender_old_faction"),
+                (eq, ":cur_kingdom_2", "$supported_pretender_old_faction"),
+                (assign, ":continue", 1),
+              (else_try),
+                (is_between, "$players_oath_renounced_against_kingdom", kingdoms_begin, kingdoms_end),
+                (this_or_next|eq, ":cur_kingdom", "$players_oath_renounced_against_kingdom"),
+                (eq, ":cur_kingdom_2", "$players_oath_renounced_against_kingdom"),
+                (assign, ":continue", 1),
+              (try_end),
+              (eq, ":continue", 1),
+              (assign, ":chance_to_make_peace", 0),
+            (try_end),
+            (try_begin),
+              (lt, ":random_no", ":chance_to_make_peace"),
+              (assign, ":continue", 1),
+              (try_begin),
+                (check_quest_active, "qst_persuade_lords_to_make_peace"),
+                (quest_get_slot, ":quest_target_faction", "qst_persuade_lords_to_make_peace", slot_quest_target_faction),
+                (quest_get_slot, ":quest_object_faction", "qst_persuade_lords_to_make_peace", slot_quest_object_faction),
+                (this_or_next|eq, ":cur_kingdom", ":quest_target_faction"),
+                (eq, ":cur_kingdom", ":quest_object_faction"),
+                (this_or_next|eq, ":cur_kingdom_2", ":quest_target_faction"),
+                (eq, ":cur_kingdom_2", ":quest_object_faction"),
+                (assign, ":continue", 0), #Do not declare war if the quest is active for the specific kingdoms
+              (try_end),
+              (eq, ":continue", 1),
+              (try_begin),
+                (eq, ":cur_kingdom", "fac_player_supporters_faction"),
+                (call_script, "script_add_notification_menu", "mnu_question_peace_offer", ":cur_kingdom_2", 0),
+              (else_try),
+                (eq, ":cur_kingdom_2", "fac_player_supporters_faction"),
+                (call_script, "script_add_notification_menu", "mnu_question_peace_offer", ":cur_kingdom", 0),
+              (else_try),
+                (call_script, "script_diplomacy_start_peace_between_kingdoms", ":cur_kingdom", ":cur_kingdom_2", ":initializing_war_peace_cond"),
+              (try_end),
+            (try_end),
+          (else_try), # AT PEACE
+            (assign, ":chance_to_declare_war", 6),
+            (val_sub, ":chance_to_declare_war", ":total_ongoing_wars"),
+            (val_mul, ":chance_to_declare_war", 50),
+            (val_mul, ":chance_to_declare_war", ":max_resources_value"),
+            (val_div, ":chance_to_declare_war", 100),
+            (try_begin),
+              (lt, ":random_no", ":chance_to_declare_war"),
+              (assign, ":continue", 1),
+              (try_begin),
+                (check_quest_active, "qst_raid_caravan_to_start_war"),
+                (quest_get_slot, ":quest_target_faction", "qst_raid_caravan_to_start_war", slot_quest_target_faction),
+                (quest_get_slot, ":quest_object_faction", "qst_raid_caravan_to_start_war", slot_quest_object_faction),
+                (this_or_next|eq, ":cur_kingdom", ":quest_target_faction"),
+                (eq, ":cur_kingdom", ":quest_object_faction"),
+                (this_or_next|eq, ":cur_kingdom_2", ":quest_target_faction"),
+                (eq, ":cur_kingdom_2", ":quest_object_faction"),
+                (assign, ":continue", 0), #Do not declare war if the quest is active for the specific kingdoms
+              (try_end),
+              (eq, ":continue", 1),
+              (call_script, "script_diplomacy_start_war_between_kingdoms", ":cur_kingdom", ":cur_kingdom_2", ":initializing_war_peace_cond"),
+            (try_end),
+          (try_end),
+        (try_end),
+      (try_end),
+     ]),
 # script_exchange_prisoners_between_factions
 # Input: arg1 = faction_no_1, arg2 = faction_no_2
   ("exchange_prisoners_between_factions",
@@ -21498,34 +21686,6 @@ scripts = [
 ("reset_world",
   [
 
-  ]
- ),
-
-#
-#获得一个国家平均资源值
-#script_get_kingdom_resources_value
-#Input:kingdom_id
-#Output:kingdom_resources_value(reg0)
-("get_kingdom_resources_value",
-  [
-    #(store_script_param_1,":cur_kingdom"),
-    (store_script_param, ":cur_kingdom", 1),
-    (assign,":total_active_kingdoms",0),
-    (try_begin),
-        (faction_slot_eq, ":cur_kingdom", slot_faction_state, sfs_active),
-        (val_add, ":total_active_kingdoms", 1),
-        (faction_get_slot, ":num_towns", ":cur_kingdom", slot_faction_num_towns),
-        (store_mul, ":kingdom_resources_value", ":num_towns", 2),
-        (faction_get_slot, ":num_castles", ":cur_kingdom", slot_faction_num_castles),
-        (val_add, ":kingdom_resources_value", ":num_castles"),
-        (val_mul, ":kingdom_resources_value", 10),
-        (val_max, ":kingdom_resources_value", 1),
-        (val_mul, ":kingdom_resources_value", 1000),
-        (faction_get_slot, ":num_armies", ":cur_kingdom", slot_faction_num_armies),
-        (val_max, ":num_armies", 1),
-        (val_div, ":kingdom_resources_value", ":num_armies"),
-    (try_end),
-    (assign,reg0,":kingdom_resources_value"),
   ]
  ),
 ]

@@ -40,8 +40,8 @@ triggers = [
       # (call_script,"script_display_faction_info",fac_kingdom_1),
       # (call_script,"script_display_center_info",500),
       #(display_message,"@"+getErrorInfo(script_game_start,22)),
-      (call_script,"script_get_kingdom_resources_value","fac_kingdom_1"),
-      (display_message,"@kingdom_resources_value:{reg0}"),
+      (call_script,"script_get_num_ongoing_wars","fac_kingdom_1"),
+      (display_message,"@num_ongoing_wars:{reg0}"),
   ]),
 
 #  (1.0, 0, ti_once, [(map_free,0)], [(start_map_conversation,"trp_guide")]),
